@@ -94,3 +94,13 @@
 
 /* availability / upwork chip in hero meta */
 .pf-hero__meta .item.is-accent { color: var(--accent); }
+
+/* ---------- modal project links ---------- */
+.pf-modal__links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+.pf-modal__links .pf-btn { gap: 9px; }
+.pf-soon {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 6px; border-radius: var(--radius-pill); line-height: 1;
+  background: var(--accent-subtle); color: var(--accent); border: 1px solid var(--border-accent);
+}
+.pf-btn--primary .pf-soon { background: rgba(255,255,255,.18); color: #fff; border-color: transparent; }

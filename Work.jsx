@@ -1,4 +1,10 @@
 /* Work.jsx — selected work with 3 real projects + layout variants + case study modal. */
+
+/* Until a project ships, its links point to the under-construction page.
+   To go live, swap the href for the real repo / demo URL. */
+const soon = (project, cat) =>
+  `Construction.html?project=${encodeURIComponent(project)}&cat=${encodeURIComponent(cat)}`;
+
 const PROJECTS = [
   {
     icon: 'scale',
@@ -8,6 +14,10 @@ const PROJECTS = [
     metrics: [{ num: '100%', cap: 'balanced invariant' }, { num: '2,400', cap: 'postings / sec' }],
     metricsFull: [{ num: '100%', cap: 'balanced invariant' }, { num: '2,400', cap: 'postings / sec' }, { num: '0', cap: 'reconciliation breaks' }],
     tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'gRPC', 'Docker'],
+    links: [
+      { label: 'View code', icon: 'github', href: soon('Ledger Microservice', 'Fintech · Backend'), soon: true },
+      { label: 'Live demo', icon: 'arrowUpRight', href: soon('Ledger Microservice', 'Fintech · Backend'), soon: true },
+    ],
     detail: 'Money systems can\u2019t afford rounding drift or lost writes. I built a double-entry ledger service where every transaction posts balanced debits and credits inside a single database transaction, so the books are correct by construction. Postings are idempotent on a client key, the journal is append-only for a clean audit trail, and balances are derived from immutable entries rather than mutated in place. Reads are served from materialised account balances kept in sync transactionally.',
   },
   {
@@ -18,6 +28,10 @@ const PROJECTS = [
     metrics: [{ num: '4.8\u2605', cap: 'app store rating' }, { num: '<2s', cap: 'cold start' }],
     metricsFull: [{ num: '4.8\u2605', cap: 'app store rating' }, { num: '<2s', cap: 'cold start' }, { num: '12k', cap: 'monthly users' }],
     tags: ['React Native', 'TypeScript', 'Expo', 'Open Banking', 'Biometrics'],
+    links: [
+      { label: 'View code', icon: 'github', href: soon('FinFlow Mobile', 'Mobile · React Native'), soon: true },
+      { label: 'Live demo', icon: 'arrowUpRight', href: soon('FinFlow Mobile', 'Mobile · React Native'), soon: true },
+    ],
     detail: 'FinFlow gives people one calm view of money spread across many banks. It connects accounts through an open-banking aggregator, secures sessions behind Face ID / fingerprint, and keeps a local offline-first store so the app is instant and usable on a subway. Transactions are categorised on-device, balances reconcile in the background, and sync is conflict-aware so nothing is lost when the network comes back. Shipped to both App Store and Play Store from one TypeScript codebase.',
   },
   {
@@ -28,6 +42,10 @@ const PROJECTS = [
     metrics: [{ num: '99.99%', cap: 'uptime' }, { num: '120ms', cap: 'p99 latency' }],
     metricsFull: [{ num: '99.99%', cap: 'uptime' }, { num: '120ms', cap: 'p99 latency' }, { num: '40+', cap: 'tenants' }],
     tags: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'EventBridge', 'Terraform'],
+    links: [
+      { label: 'View code', icon: 'github', href: soon('PayGate API', 'Cloud · IaaS'), soon: true },
+      { label: 'Live demo', icon: 'arrowUpRight', href: soon('PayGate API', 'Cloud · IaaS'), soon: true },
+    ],
     detail: 'PayGate routes payments for many tenants through one hardened API without anyone\u2019s traffic touching anyone else\u2019s data. It runs fully serverless \u2014 API Gateway, Lambda, DynamoDB, and an EventBridge backbone \u2014 so cost tracks usage and the platform scales to zero between bursts. Every request is idempotent, sensitive data is tokenised so the system stays out of PCI scope, and the whole environment is reproducible from Terraform across regions. Webhooks retry with backoff and a dead-letter queue, so a flaky downstream never drops a payment.',
   },
 ];
@@ -67,6 +85,18 @@ function CaseStudyModal({ project, showMetrics, onClose }) {
           <div className="pf-modal__tags">
             {project.tags.map((t) => <Tag key={t}>{t}</Tag>)}
           </div>
+          {project.links && project.links.length > 0 && (
+            <div className="pf-modal__links">
+              {project.links.map((l, i) => (
+                <a key={i} className={`pf-btn pf-btn--${i === 0 ? 'primary' : 'secondary'}`}
+                   href={l.href} target={l.soon ? undefined : '_blank'} rel="noopener">
+                  <Icon name={l.icon} size={16} />
+                  <span>{l.label}</span>
+                  {l.soon && <span className="pf-soon">soon</span>}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
