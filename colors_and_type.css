@@ -1,0 +1,288 @@
+/* ============================================================
+   Diego Delgado — Design System
+   Foundations: color, type, spacing, radius, shadow, motion
+   Cold / minimal / technical. Single-accent blue (#4381C1).
+   ============================================================ */
+
+/* ---- Fonts ---- */
+/* Display + body load from Google Fonts CDN. Mono is self-hosted (user-supplied Roboto Mono). */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/RobotoMono-VariableFont_wght.ttf') format('truetype-variations'),
+       url('fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype-variations'),
+       url('fonts/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ============ COLOR ============ */
+
+  /* Primary — blue scale built around the brand seed #4381C1 (=500) */
+  --blue-50:  #eef4fb;
+  --blue-100: #d7e5f5;
+  --blue-200: #b0cbeb;
+  --blue-300: #84addd;
+  --blue-400: #5c93ce;
+  --blue-500: #4381c1;  /* brand seed */
+  --blue-600: #3568a0;
+  --blue-700: #2a527e;
+  --blue-800: #1f3d5e;
+  --blue-900: #16293f;
+  --blue-950: #0f1b2d;
+
+  /* Neutrals — cool, blue-tinted slate */
+  --neutral-0:   #ffffff;
+  --neutral-50:  #f6f8fa;
+  --neutral-100: #edf1f5;
+  --neutral-200: #dce3eb;
+  --neutral-300: #c2ccd8;
+  --neutral-400: #94a2b4;
+  --neutral-500: #6b7a8d;
+  --neutral-600: #4e5c6e;
+  --neutral-700: #3a4757;
+  --neutral-800: #283341;
+  --neutral-900: #18212c;
+  --neutral-950: #0e141b;
+
+  /* Accent — icy cyan, used sparingly for "cloud" highlights / data viz */
+  --cyan-400: #5bc8e0;
+  --cyan-500: #2fa8c7;
+  --cyan-600: #1f87a3;
+
+  /* Semantic (kept cool to match palette) */
+  --success-bg: #e6f5ef;
+  --success:    #1f9e7e;
+  --success-fg: #0f5f4c;
+  --warning-bg: #f8f0df;
+  --warning:    #c79324;
+  --warning-fg: #7a5a10;
+  --danger-bg:  #fbe9ea;
+  --danger:     #d24f55;
+  --danger-fg:  #8a2c31;
+  --info-bg:    var(--blue-50);
+  --info:       var(--blue-500);
+  --info-fg:    var(--blue-800);
+
+  /* ---- Semantic surface + text roles (light) ---- */
+  --bg:        var(--neutral-0);
+  --bg-subtle: var(--neutral-50);
+  --bg-muted:  var(--neutral-100);
+  --surface:   var(--neutral-0);
+  --surface-raised: var(--neutral-0);
+  --bg-inverse: var(--blue-950);
+
+  --fg:        var(--neutral-900);   /* primary text */
+  --fg-muted:  var(--neutral-600);   /* secondary text */
+  --fg-subtle: var(--neutral-500);   /* tertiary / captions */
+  --fg-faint:  var(--neutral-400);   /* disabled / placeholder */
+  --fg-on-accent: var(--neutral-0);
+  --fg-on-inverse: var(--neutral-100);
+
+  --accent:        var(--blue-500);
+  --accent-hover:  var(--blue-600);
+  --accent-active: var(--blue-700);
+  --accent-subtle: var(--blue-50);
+  --on-accent:     #ffffff;
+  --link:          var(--blue-600);
+
+  --border:        var(--neutral-200);  /* hairline */
+  --border-strong: var(--neutral-300);
+  --border-accent: var(--blue-500);
+  --ring:          color-mix(in oklch, var(--blue-500) 38%, transparent);
+
+  /* ============ TYPE ============ */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Modular scale (~1.25, 16px base) */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-md:   1.125rem;  /* 18 */
+  --text-lg:   1.375rem;  /* 22 */
+  --text-xl:   1.75rem;   /* 28 */
+  --text-2xl:  2.25rem;   /* 36 */
+  --text-3xl:  3rem;      /* 48 */
+  --text-4xl:  3.75rem;   /* 60 */
+  --text-5xl:  4.75rem;   /* 76 */
+
+  --leading-tight: 1.08;
+  --leading-snug:  1.25;
+  --leading-normal:1.5;
+  --leading-relaxed:1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.14em;  /* mono eyebrow labels */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ============ SPACING (4px base) ============ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ============ RADIUS ============ */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* ============ SHADOW (cool, blue-tinted, restrained) ============ */
+  --shadow-xs: 0 1px 2px rgba(15,27,45,0.06);
+  --shadow-sm: 0 1px 3px rgba(15,27,45,0.08), 0 1px 2px rgba(15,27,45,0.04);
+  --shadow-md: 0 4px 16px -4px rgba(15,27,45,0.12);
+  --shadow-lg: 0 16px 40px -12px rgba(15,27,45,0.18);
+  --shadow-focus: 0 0 0 3px var(--ring);
+
+  /* ============ MOTION ============ */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+
+  /* layout */
+  --container: 1200px;
+  --container-narrow: 760px;
+}
+
+/* ---- Dark surface roles (deep cold navy) ---- */
+.theme-dark, [data-theme="dark"] {
+  --bg:        var(--blue-950);
+  --bg-subtle: #0c1726;
+  --bg-muted:  var(--blue-900);
+  --surface:   #122033;
+  --surface-raised: #16273d;
+  --bg-inverse: var(--neutral-0);
+
+  --fg:        #eaf1f8;
+  --fg-muted:  #9fb2c6;
+  --fg-subtle: #7e93a9;
+  --fg-faint:  #5e718a;
+  --fg-on-inverse: var(--neutral-900);
+
+  --accent:        var(--blue-400);
+  --accent-hover:  var(--blue-300);
+  --accent-active: var(--blue-200);
+  --accent-subtle: rgba(67,129,193,0.16);
+  --on-accent:     var(--blue-950);
+  --link:          var(--blue-300);
+
+  --border:        rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.18);
+  --ring:          color-mix(in oklch, var(--blue-400) 50%, transparent);
+
+  --shadow-md: 0 4px 16px -4px rgba(0,0,0,0.5);
+  --shadow-lg: 0 16px 40px -12px rgba(0,0,0,0.6);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES — opt-in via .ds class on a wrapper
+   ============================================================ */
+.ds {
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.ds h1, .ds .h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+  margin: 0;
+}
+.ds h2, .ds .h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+.ds h3, .ds .h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+.ds h4, .ds .h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+.ds p, .ds .body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-muted);
+  margin: 0;
+}
+.ds .lead {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-muted);
+}
+.ds small, .ds .caption {
+  font-size: var(--text-sm);
+  color: var(--fg-subtle);
+}
+
+/* Mono eyebrow label — the signature "engineer" detail */
+.ds .eyebrow, .ds .label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ds code, .ds .code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-muted);
+  color: var(--fg);
+  padding: 0.12em 0.4em;
+  border-radius: var(--radius-xs);
+}
+
+.ds a {
+  color: var(--link);
+  text-decoration: none;
+}
+.ds a:hover { text-decoration: underline; text-underline-offset: 3px; }
