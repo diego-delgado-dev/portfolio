@@ -35,7 +35,7 @@ This project is a static portfolio built with React components loaded directly i
 3. If your browser blocks local module loading, serve the folder through a simple local server, for example:
 
 ```bash
-cd /Users/DiegoDelgado/Documents/projects/personal/portfolio
+cd /Path/To/The/Repo/portfolio
 python3 -m http.server 8000
 ```
 
